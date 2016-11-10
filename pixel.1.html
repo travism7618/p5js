@@ -1,0 +1,163 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <title>p5js Template</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.3/p5.js"></script>
+
+    <script>
+        var value1, value2, value3, value4, color, x, y, r, b, g,size
+
+        function setup() {
+            createCanvas(800, 600);
+            background(30, 15, 100) //night sky background
+            x = 400
+            y = 300
+            value = 0
+        }
+        frameRate(10)
+        
+        
+    //*determines the color based off the position of the 5 circles
+        function draw() {
+            r = 255
+            b = 255
+            if (y > 300) {
+                r -= r
+                b -= b
+                g = 255
+
+            }
+            else
+                g -= g
+            if (x < 400) {
+                r -= r
+                b += b
+
+            }
+            else {
+                if (x > 400) {
+                    r += r
+                    b -= b
+                }
+            }
+
+            if (value === 1) { //this code makes sure the circles dont show up unless this variable is true
+
+            //*the movement of the 5 circles based off of which arrow key you press
+                if (keyIsDown(LEFT_ARROW))
+                    x -= 5;
+
+                if (keyIsDown(RIGHT_ARROW))
+                    x += 5;
+
+                if (keyIsDown(UP_ARROW))
+                    y -= 5;
+
+                if (keyIsDown(DOWN_ARROW))
+                    y += 5;
+                    
+                //*the actual code for the circles
+                noStroke()
+                fill(r, g, b)
+                ellipse(x, y, 50) //middle circle
+                ellipse(x - 50, y, 25) //left circle
+                ellipse(x + 50, y, 25) //right circle
+                ellipse(x, y - 50, 25) //top circle
+                ellipse(x, y + 50, 25) //bottom circle
+                background(0, 30)
+
+            }
+
+        }
+
+        function mouseMoved() {
+            var color //allows the circle and the line to be the same color
+            if (value === 0) {
+                color = random(70, 100)
+                strokeWeight(1)
+                stroke(255, 255, color)
+                
+                //*position of the circle made around the mouse 
+                value1 = (mouseX - random(-25, 25))
+                value2 = (mouseY - random(-25, 25))
+                fill(255, 255, color)
+                ellipse(value1, value2, random(10 - 14))//circle made arround the mouse
+                strokeWeight(0.5)
+                line(value1, value2, value3, value4)//line made from the position of the circle that was made the last loop to the cicle made in the current loop 
+                
+                //*position of current loop saved to be used as a reference point for the next time around
+                value3 = value1
+                value4 = value2
+                //*the random circles that appear throughout the canvas
+                size = random(10 - 14)
+                ellipse(random(800), random(600), size)
+            }
+            else {}
+
+
+
+        }
+
+        function mouseDragged() {
+
+
+
+            
+            //*makes the position of the rectangles appear randomly near the mouse in a random color
+            stroke(0, random(100, 200), random(100, 200))
+            strokeWeight(1)
+            value1 = (mouseX - random(-50, 50))
+            value2 = (mouseY - random(-50, 50))
+            fill(0, random(100, 200), random(100, 200))
+            rectMode(CENTER)
+            rect(value1, value2, 10, 10)
+            background(0, 20)//makes background fade as the mouse moves
+
+
+
+        }
+        //sets up background and makes the 5 circles disapear when pixel art appears
+        function mousePressed() {
+            value = 0
+            background(30, 15, 100, 10)
+
+        }
+
+        //*when pixel art is done if the 5 circles arent on screen it'll go back to the constellation art
+        function mouseReleased() {
+            if (value == 0) {
+                background(30, 15, 100)
+                //*resets the variables for the constellation art
+                value3 = value1
+                value4 = value2
+
+            }
+        }
+
+
+
+        function keyPressed() {
+            fill(0, 0, 255)
+            value = 1
+        }
+        // uncomment to prevent any default behavior
+        // return false;
+    </script>
+</head>
+
+<body>
+    <div id="code" class="container-fluid">
+        <script src="https://gist-it.appspot.com/github/travism7618/p5js/blob/gh-pages/pixel.1.html?footer=0"></script>
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script>
+        $(window).bind("load", function() {
+            $('#code').before($('#defaultCanvas0').remove());
+        });
+    </script>
+</body>
+
+</html>
