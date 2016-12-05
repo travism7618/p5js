@@ -1,0 +1,725 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <title>p5js Template</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.3/p5.js"></script>
+
+    <script>
+        var speed, score, c1, c2, c3
+        var r, g, b, y, lane, al, sr, sg, sb,noteHit
+        var rNote2, gNote2, bNote2, yNote2, laneNote2, alNote2, srNote2, sgNote2, sbNote2,noteHitNote2
+        var rNote3, gNote3, bNote3, yNote3, laneNote3, alNote3, srNote3, sgNote3, sbNote3,noteHitNote3
+        var rNote4, gNote4, bNote4, yNote4, laneNote4, alNote4, srNote4, sgNote4, sbNote4,noteHitNote4
+        var rNote5, gNote5, bNote5, yNote5, laneNote5, alNote5, srNote5, sgNote5, sbNote5,noteHitNote5
+        var rNote6, gNote6, bNote6, yNote6, laneNote6, alNote6, srNote6, sgNote6, sbNote6,noteHitNote6
+        var rNote7, gNote7, bNote7, yNote7, laneNote7, alNote7, srNote7, sgNote7, sbNote7,noteHitNote7
+        var rNote8, gNote8, bNote8, yNote8, laneNote8, alNote8, srNote8, sgNote8, sbNote8,noteHitNote8
+        var rNote9, gNote9, bNote9, yNote9, laneNote9, alNote9, srNote9, sgNote9, sbNote9,noteHitNote9
+        var rNote10, gNote10, bNote10, yNote10, laneNote10, alNote10, srNote10, sgNote10, sbNote10,noteHitNote10
+
+
+        function setup() {
+            rectMode(CENTER)
+            createCanvas(800, 600);
+            score = 0
+            speed = 15 //speed in which the notes move
+            //color values for the keys to light up
+            c1 = 0 
+            c2 = 0
+            c3 = 0
+            
+            //* note#1 variables intialization
+            noteHit=0 //used to decide if the note was hit on time
+            //"s" mean
+            sr = 0  
+            sg = 0
+            sb = 0
+            r = 0
+            g = 0
+            b = 0 
+            y = -1200
+            
+            //* used to put note#1 in a random lane
+            lane = round(random(1, 3))
+            if (lane == 1) {
+                al = width / 4
+                r = 255
+
+            }
+            else if (lane == 2) {
+                al = width / 2
+                g = 255
+            }
+            else {
+                al = width / 4 * 3
+                b = 255
+            }
+            
+            // note#2 variables intialization
+            noteHitNote2=0
+            srNote2 = 0
+            sgNote2 = 0
+            sbNote2 = 0
+            rNote2 = 0
+            gNote2 = 0
+            bNote2 = 0 
+            yNote2 = -1500
+            
+             //* used to put note#2 in a random lane2
+            laneNote2 = round(random(1, 3))
+            if (laneNote2 == 1) {
+                alNote2 = width / 4
+                rNote2 = 255
+
+            }
+            else if (laneNote2 == 2) {
+                alNote2 = width / 2
+                gNote2 = 255
+            }
+            else {
+                alNote2 = width / 4 * 3
+                bNote2 = 255
+            }
+            
+             // note#3 variables intialization
+            noteHitNote3=0
+            srNote3 = 0
+            sgNote3 = 0
+            sbNote3 = 0
+            rNote3 = 0
+            gNote3 = 0
+            bNote3 = 0 
+            yNote3 = -2100
+            
+             //* used to put note#3 in a random lane3
+            laneNote3 = round(random(1, 3))
+            if (laneNote3 == 1) {
+                alNote3 = width / 4
+                rNote3 = 255
+
+            }
+            else if (laneNote3 == 2) {
+                alNote3 = width / 2
+                gNote3 = 255
+            }
+            else {
+                alNote3 = width / 4 * 3
+                bNote3 = 255
+            }
+            
+            // note#4 variables intialization
+            noteHitNote4=0
+            srNote4 = 0
+            sgNote4 = 0
+            sbNote4 = 0
+            rNote4 = 0
+            gNote4 = 0
+            bNote4 = 0 
+            yNote4 = -2400
+            
+             //* used to put note#4 in a random lane4
+            laneNote4 = round(random(1, 3))
+            if (laneNote4 == 1) {
+                alNote4 = width / 4
+                rNote4 = 255
+
+            }
+            else if (laneNote4 == 2) {
+                alNote4 = width / 2
+                gNote4 = 255
+            }
+            else {
+                alNote4 = width / 4 * 3
+                bNote4 = 255
+            }
+            // note#5 variables intialization
+            noteHitNote5=0
+            srNote5 = 0
+            sgNote5 = 0
+            sbNote5 = 0
+            rNote5 = 0
+            gNote5 = 0
+            bNote5 = 0 
+            yNote5 = -3000 
+            
+             //* used to put note#5 in a random lane5
+            laneNote5 = round(random(1, 3))
+            if (laneNote5 == 1) {
+                alNote5 = width / 4
+                rNote5 = 255
+
+            }
+            else if (laneNote5 == 2) {
+                alNote5 = width / 2
+                gNote5 = 255
+            }
+            else {
+                alNote5 = width / 4 * 3
+                bNote5 = 255
+            }
+            // note#6 variables intialization
+            noteHitNote6=0
+            srNote6 = 0
+            sgNote6 = 0
+            sbNote6 = 0
+            rNote6 = 0
+            gNote6 = 0
+            bNote6 = 0 
+            yNote6 = -3600 
+            
+             //* used to put note#6 in a random lane
+            laneNote6 = round(random(1, 3))
+            if (laneNote6 == 1) {
+                alNote6 = width / 4
+                rNote6 = 255
+
+            }
+            else if (laneNote6 == 2) {
+                alNote6 = width / 2
+                gNote6 = 255
+            }
+            else {
+                alNote6 = width / 4 * 3
+                bNote6 = 255
+            }
+            // note#7 variables intialization
+            noteHitNote7=0
+            srNote7 = 0
+            sgNote7 = 0
+            sbNote7 = 0
+            rNote7 = 0
+            gNote7 = 0
+            bNote7 = 0 
+            yNote7 = -4200 
+            
+             //* used to put note#7 in a random lane
+            laneNote7 = round(random(1, 3))
+            if (laneNote7 == 1) {
+                alNote7 = width / 4
+                rNote7 = 255
+
+            }
+            else if (laneNote7 == 2) {
+                alNote7 = width / 2
+                gNote7 = 255
+            }
+            else {
+                alNote7 = width / 4 * 3
+                bNote7 = 255
+            }
+            // note#8 variables intialization
+            noteHitNote8=0
+            srNote8 = 0
+            sgNote8 = 0
+            sbNote8 = 0
+            rNote8 = 0
+            gNote8 = 0
+            bNote8 = 0 
+            yNote8 = -4800 
+            
+             //* used to put note#8 in a random lane
+            laneNote8 = round(random(1, 3))
+            if (laneNote8 == 1) {
+                alNote8 = width / 4
+                rNote8 = 255
+
+            }
+            else if (laneNote8 == 2) {
+                alNote8 = width / 2
+                gNote8 = 255
+            }
+            else {
+                alNote8 = width / 4 * 3
+                bNote8 = 255
+            }
+            // note#9 variables intialization
+            noteHitNote9=0
+            srNote9 = 0
+            sgNote9 = 0
+            sbNote9 = 0
+            rNote9 = 0
+            gNote9 = 0
+            bNote9 = 0 
+            yNote9 = -6000 
+            
+             //* used to put note#9 in a random lane
+            alNote9 = width / 4
+            rNote9 = 255
+            
+            // note#10 variables intialization
+            noteHitNote10=0
+            srNote10 = 0
+            sgNote10 = 0
+            sbNote10 = 0
+            rNote10 = 0
+            gNote10 = 0
+            bNote10 = 0 
+            yNote10 = -6000 
+            
+             //* used to put note#9 in a random lane
+            alNote10 = width / 4*3
+            bNote10 = 255
+
+            
+           
+            
+            
+            
+        }
+
+        function draw() {
+            background(0)
+            
+            // Shows your score
+            fill(255)
+            stroke(0)
+            textSize(20);
+            text("Score: " + score, 10, 30);
+            
+            //*used to determine if note was never hit
+            if(y==600&&noteHit==0){score-=1}
+            if(yNote2==600&&noteHitNote2==0){score-=1}
+            if(yNote3==600&&noteHitNote3==0){score-=1}
+            if(yNote4==600&&noteHitNote4==0){score-=1}
+            if(yNote5==600&&noteHitNote5==0){score-=1}
+            if(yNote6==600&&noteHitNote6==0){score-=1}
+            if(yNote7==600&&noteHitNote7==0){score-=1}
+            if(yNote8==600&&noteHitNote8==0){score-=1}
+            if(yNote9==600&&noteHitNote9==0){score-=1}
+            if(yNote10==600&&noteHitNote10==0){score-=1}
+            
+            // keys
+            stroke(0)
+            fill(255, c1, c1) 
+            rect(width / 4, 550, 200, 100)
+            fill(c2, 255, c2)
+            rect(width / 2, 550, 200, 100)
+            fill(c3, c3, 255)
+            rect(width / 4 * 3, 550, 200, 100)
+            
+            // lane lines
+            stroke(255)
+            line(width / 8, 0, width / 8, height)
+            line(width / 8 * 3, 0, width / 8 * 3, height)
+            line(width / 8 * 5, 0, width / 8 * 5, height)
+            line(width / 8 * 7, 0, width / 8 * 7, height)
+            
+            // makes keys lighter based on which key you press
+            if (keyIsDown(LEFT_ARROW)) {
+                c1 = 75
+            }
+            else {
+                c1 = 1
+            }
+            if (keyIsDown(DOWN_ARROW)) {
+                c2 = 125
+            }
+            else {
+                c2 = 1
+            }
+            if (keyIsDown(RIGHT_ARROW)) {
+                c3 = 75
+            }
+            else {
+                c3 = 1
+            }
+
+            // // note#1 code
+            //color of note
+            fill(r, g, b)
+            stroke(sr, sg, sb)
+            
+            rect(al, y, 150, 75)
+            y += speed //moves the note
+            
+            // note#2 code
+            fill(rNote2, gNote2, bNote2)
+            stroke(srNote2, sgNote2, sbNote2)
+            rect(alNote2, yNote2, 150, 75)
+            yNote2 += speed
+            
+            // note#3 code
+            fill(rNote3, gNote3, bNote3)
+            stroke(srNote3, sgNote3, sbNote3)
+            rect(alNote3, yNote3, 150, 75)
+            yNote3 += speed
+            
+            // note#4 code
+            fill(rNote4, gNote4, bNote4)
+            stroke(srNote4, sgNote4, sbNote4)
+            rect(alNote4, yNote4, 150, 75)
+            yNote4 += speed
+            
+            // note#5 code
+            fill(rNote5, gNote5, bNote5)
+            stroke(srNote5, sgNote5, sbNote5)
+            rect(alNote5, yNote5, 150, 75)
+            yNote5 += speed
+            
+            // note#6 code
+            fill(rNote6, gNote6, bNote6)
+            stroke(srNote6, sgNote6, sbNote6)
+            rect(alNote6, yNote6, 150, 75)
+            yNote6 += speed
+            
+            // note#7 code
+            fill(rNote7, gNote7, bNote7)
+            stroke(srNote7, sgNote7, sbNote7)
+            rect(alNote7, yNote7, 150, 75)
+            yNote7 += speed
+            
+            // note#8 code
+            fill(rNote8, gNote8, bNote8)
+            stroke(srNote8, sgNote8, sbNote8)
+            rect(alNote8, yNote8, 150, 75)
+            yNote8 += speed
+            
+            // note#9 code
+            fill(rNote9, gNote9, bNote9)
+            stroke(srNote9, sgNote9, sbNote9)
+            rect(alNote9, yNote9, 150, 75)
+            yNote9 += speed
+            
+            // note#10 code
+            fill(rNote10, gNote10, bNote10)
+            stroke(srNote10, sgNote10, sbNote10)
+            rect(alNote10, yNote9, 150, 75)
+            yNote10 += speed
+            
+            
+            
+            
+
+
+
+
+        }
+
+        function keyPressed() {
+            
+            // determines if any of the notes were hit when it was pressed
+            if (keyCode == LEFT_ARROW && al == width / 4 && y > 500 && y < 600) {
+                score += 2
+                //*changes color of note when hit
+                g = 75
+                b = 75
+                sr = r
+                sg = g
+                sb = b
+                //makes it known that the note was hit
+                noteHit=1
+                
+                
+            }
+            else if(keyCode == LEFT_ARROW && alNote2 == width / 4 && yNote2 > 500 && yNote2 < 600){
+                score += 2
+                
+                gNote2= 75
+                bNote2 = 75
+                srNote2 = rNote2
+                sgNote2 = gNote2
+                sbNote2 = bNote2
+                noteHitNote2=1
+            }
+            else if(keyCode == LEFT_ARROW && alNote3 == width / 4 && yNote3 > 500 && yNote3 < 600){
+                score += 2
+                
+                gNote3= 75
+                bNote3 = 75
+                srNote3 = rNote3
+                sgNote3 = gNote3
+                sbNote3 = bNote3
+                noteHitNote3=1
+            }
+              else if(keyCode == LEFT_ARROW && alNote4 == width / 4 && yNote4 > 500 && yNote4 < 600){
+                score += 2
+                
+                gNote4= 75
+                bNote4 = 75
+                srNote4 = rNote4
+                sgNote4 = gNote4
+                sbNote4 = bNote4
+                noteHitNote4=1
+            }
+              else if(keyCode == LEFT_ARROW && alNote5 == width / 4 && yNote5 > 500 && yNote5 < 600){
+                score += 2
+                
+                gNote5= 75
+                bNote5 = 75
+                srNote5 = rNote5
+                sgNote5 = gNote5
+                sbNote5 = bNote5
+                noteHitNote5=1
+            }
+             else if(keyCode == LEFT_ARROW && alNote6 == width / 4 && yNote6 > 500 && yNote6 < 600){
+                score += 2
+                
+                gNote6= 75
+                bNote6 = 75
+                srNote6 = rNote6
+                sgNote6 = gNote6
+                sbNote6 = bNote6
+                noteHitNote6=1
+            }
+            else if(keyCode == LEFT_ARROW && alNote7 == width / 4 && yNote7 > 500 && yNote7 < 600){
+                score += 2
+                
+                gNote7= 75
+                bNote7 = 75
+                srNote7 = rNote7
+                sgNote7 = gNote7
+                sbNote7 = bNote7
+                noteHitNote7=1
+            }
+            else if(keyCode == LEFT_ARROW && alNote8 == width / 4 && yNote8 > 500 && yNote8 < 600){
+                score += 2
+                
+                gNote8= 75
+                bNote8 = 75
+                srNote8 = rNote8
+                sgNote8 = gNote8
+                sbNote8 = bNote8
+                noteHitNote8=1
+            }
+             else if(keyCode == LEFT_ARROW && alNote9 == width / 4 && yNote9 > 500 && yNote9 < 600){
+                score += 2
+                
+                gNote9= 75
+                bNote9 = 75
+                srNote9 = rNote9
+                sgNote9 = gNote9
+                sbNote9 = bNote9
+                noteHitNote9=1
+                 
+             }
+            //*if no notes were hit but key was pressed then its subtracts score
+            else if (keyCode == LEFT_ARROW) {
+                score -= 1
+                
+                
+
+
+            }
+            
+            
+            
+            
+
+
+            if (keyCode == DOWN_ARROW && al == width / 2 && y > 500 && y < 600) {
+                score += 2
+                
+                r = 125
+                b = 125
+                sr = r
+                sg = g
+                sb = b
+                noteHit=1
+                
+               
+            }
+            else if(keyCode == DOWN_ARROW && alNote2 == width / 2 && yNote2 > 500 && yNote2 < 600){ 
+                score += 2
+                
+                rNote2 = 125
+                bNote2 = 125
+                srNote2 = rNote2
+                sgNote2 = gNote2
+                sbNote2 = bNote2
+                noteHitNote2=1
+                
+            }
+              else if(keyCode == DOWN_ARROW && alNote3 == width / 2 && yNote3 > 500 && yNote3 < 600){ 
+                score += 2
+                
+                rNote3 = 125
+                bNote3 = 125
+                srNote3 = rNote3
+                sgNote3 = gNote3
+                sbNote3 = bNote3
+                noteHitNote3=1
+                
+            }
+             else if(keyCode == DOWN_ARROW && alNote4 == width / 2 && yNote4 > 500 && yNote4 < 600){ 
+                score += 2
+                
+                rNote4 = 125
+                bNote4 = 125
+                srNote4 = rNote4
+                sgNote4 = gNote4
+                sbNote4 = bNote4
+                noteHitNote4=1
+                
+            }
+             else if(keyCode == DOWN_ARROW && alNote5 == width / 2 && yNote5 > 500 && yNote5 < 600){ 
+                score += 2
+                
+                rNote5 = 125
+                bNote5 = 125
+                srNote5 = rNote5
+                sgNote5 = gNote5
+                sbNote5 = bNote5
+                noteHitNote5=1
+                
+            }
+            else if(keyCode == DOWN_ARROW && alNote6 == width / 2 && yNote6 > 500 && yNote6 < 600){ 
+                score += 2
+                
+                rNote6 = 125
+                bNote6 = 125
+                srNote6 = rNote6
+                sgNote6 = gNote6
+                sbNote6 = bNote6
+                noteHitNote6=1
+                
+            }
+            else if(keyCode == DOWN_ARROW && alNote7 == width / 2 && yNote7 > 500 && yNote7 < 600){ 
+                score += 2
+                
+                rNote7 = 125
+                bNote7 = 125
+                srNote7 = rNote7
+                sgNote7 = gNote7
+                sbNote7 = bNote7
+                noteHitNote7=1
+                
+            }
+            else if(keyCode == DOWN_ARROW && alNote8 == width / 2 && yNote8 > 500 && yNote8 < 600){ 
+                score += 2
+                
+                rNote8 = 125
+                bNote8 = 125
+                srNote8 = rNote8
+                sgNote8 = gNote8
+                sbNote8 = bNote8
+                noteHitNote8=1
+                
+            }
+            else if (keyCode == DOWN_ARROW) {
+                score -= 1
+
+            }
+
+
+
+
+            if (keyCode == RIGHT_ARROW && al == width / 4 * 3 && y > 500 && y < 600) {
+                score += 2
+                g = 75
+                r = 75
+                sr = r
+                sg = g
+                sb = b
+                noteHit=1
+
+            }
+            else if (keyCode == RIGHT_ARROW && alNote2 == width / 4 * 3 && yNote2 > 500 && yNote2 < 600) {
+                score += 2
+                gNote2 = 75
+                rNote2 = 75
+                srNote2 = rNote2
+                sgNote2 = gNote2
+                sbNote2 = bNote2
+                noteHitNote2=1
+                
+            }
+              else if (keyCode == RIGHT_ARROW && alNote3 == width / 4 * 3 && yNote3 > 500 && yNote3 < 600) {
+                score += 2
+                gNote3 = 75
+                rNote3 = 75
+                srNote3 = rNote3
+                sgNote3 = gNote3
+                sbNote3 = bNote3
+                noteHitNote3=1
+                  
+              }
+               else if (keyCode == RIGHT_ARROW && alNote4 == width / 4 * 3 && yNote4 > 500 && yNote4 < 600) {
+                score += 2
+                gNote4 = 75
+                rNote4 = 75
+                srNote4 = rNote4
+                sgNote4 = gNote4
+                sbNote4 = bNote4
+                noteHitNote4=1
+                  
+              }
+               else if (keyCode == RIGHT_ARROW && alNote5 == width / 4 * 3 && yNote5 > 500 && yNote5 < 600) {
+                score += 2
+                gNote5 = 75
+                rNote5 = 75
+                srNote5 = rNote5
+                sgNote5 = gNote5
+                sbNote5 = bNote5
+                noteHitNote5=1
+                  
+              }
+              else if (keyCode == RIGHT_ARROW && alNote6 == width / 4 * 3 && yNote6 > 500 && yNote6 < 600) {
+                score += 2
+                gNote6 = 75
+                rNote6 = 75
+                srNote6 = rNote6
+                sgNote6 = gNote6
+                sbNote6 = bNote6
+                noteHitNote6=1
+                  
+              }
+               else if (keyCode == RIGHT_ARROW && alNote7 == width / 4 * 3 && yNote7 > 500 && yNote7 < 600) {
+                score += 2
+                gNote7 = 75
+                rNote7 = 75
+                srNote7 = rNote7
+                sgNote7 = gNote7
+                sbNote7 = bNote7
+                noteHitNote7=1
+                  
+              } 
+              else if (keyCode == RIGHT_ARROW && alNote8 == width / 4 * 3 && yNote8 > 500 && yNote8 < 600) {
+                score += 2
+                gNote8 = 75
+                rNote8 = 75
+                srNote8 = rNote8
+                sgNote8 = gNote8
+                sbNote8 = bNote8
+                noteHitNote8=1
+                  
+              } 
+              else if (keyCode == RIGHT_ARROW && alNote10 == width / 4 * 3 && yNote10 > 500 && yNote10 < 600) {
+                score += 2
+                gNote10 = 75
+                rNote8 = 75
+                srNote10 = rNote10
+                sgNote10 = gNote10
+                sbNote10 = bNote10
+                noteHitNote10=1
+                  
+              } 
+            else if (keyCode == RIGHT_ARROW) {
+                score -= 1
+
+            }
+
+
+
+
+
+        }
+    </script>
+</head>
+
+<body>
+    <div id="code" class="container-fluid">
+        <script src="https://gist-it.appspot.com/github/travism7618/p5js/blob/gh-pages/conditional-project.html?footer=0"></script>
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script>
+        $(window).bind("load", function() {
+            $('#code').before($('#defaultCanvas0').remove());
+        });
+    </script>
+</body>
+
+
+</html>
