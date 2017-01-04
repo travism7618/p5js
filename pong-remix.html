@@ -1,0 +1,162 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <title>p5js Template</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.3/p5.js"></script>
+    
+    <script>
+    var ball1={
+            xSpeed:0, //speed in which it moves left and right  
+            ySpeed:0, //speed in which it moves up and down 
+            x:0, //position along the x axis
+            y:0, //position along the y axis
+            clicked:0 //whether or not the mouse was clicked
+        
+    }
+    var changeR,changeG,changeB,r,g,b,gameover,score,rgb
+        function setup() {
+            createCanvas(500,500);
+            
+            
+            //intializes the balls position to the middle of the screen 
+            ball1.x=width/2 
+            ball1.y=height/2
+            
+            r=0
+            g=0
+            b=0
+            
+            //chooses a random number from 1-3 and a color based off that number (red, green, or blue )
+            rgb = round(random(1, 3))
+            if (rgb == 1) {
+                
+                r = 255
+
+            }
+            else if (rgb == 2) {
+                
+                g = 255
+            }
+            else {
+                
+                b = 255
+            }
+            
+           
+            changeR=0
+            changeG=0
+            changeB=0
+            fill(255)
+            noStroke()
+            rectMode(CENTER)
+            gameover=0
+            score=0
+        }
+
+        function draw() {
+            
+            background(r,g,b,200)
+            if (gameover==0){
+            textSize(20);
+            text("Score: " + score, 10, 30)}
+            
+        
+            
+            //when the game starts, the color of the background starts to change
+           if(gameover==0 ){ 
+            r+=changeR
+            g+=changeG
+            b+=changeB}
+            
+            //as the color changes, the rate in which it changes shifts when one color value reaches its maximum 
+            if (r>=255){
+                changeR=-0.1
+                changeG=0.2
+            }
+            if (g>=255){
+                changeG=-0.1
+                changeB=0.2
+            }
+            if (b>=255){
+                changeB=-0.1
+                changeR=0.2
+            }
+
+
+
+            //if the ball hits the right or left side it bounces the other way
+            if(ball1.x>490||ball1.x<10){
+                ball1.xSpeed*=-1
+                if(ball1.xSpeed>0){
+                    ball1.xSpeed+=0.2
+                }
+                else {ball1.xSpeed-=0.2}
+
+            }
+            //if the ball hits the top side, it bounces back down
+            if(ball1.y<10){
+
+                ball1.ySpeed*=-1
+                ball1.ySpeed+=0.2
+            }
+            // if the user hasnt lost yet, and the ball hits the paddle, the
+            if(gameover==0&&ball1.x>=(constrain(mouseX,0+51,width-51))-50&& ball1.x<=(constrain(mouseX,0+51,width-51))+50&&ball1.y>=470){
+                score+=5
+                
+                ball1.ySpeed*=-1
+                ball1.ySpeed-=0.2
+                
+                if(ball1.xSpeed>0){
+                    ball1.xSpeed+=0.2
+                }
+                else {ball1.xSpeed-=0.2}
+                
+            }
+            
+           
+            if(ball1.y>490){
+                gameover=1 //game ends
+                textAlign(CENTER)
+                text("Game Over",width/2,height/2)
+                text("Your Score: " + score, width/2, (height/2)+50)//shows final score
+            }
+            
+            
+            ellipse(ball1.x,ball1.y,10,10)//ball 
+            
+            ball1.x+=ball1.xSpeed
+            ball1.y+=ball1.ySpeed
+            //shows the paddle if game is running
+            if(gameover==0){
+            rect(constrain(mouseX,0+51,width-51),480,100,20)}
+            
+        }
+          function mousePressed(){
+            //makes the ball start moving 
+           if(ball1.clicked==0){ 
+                ball1.xSpeed =random(-5,5)
+                ball1.ySpeed =random(3,5)
+                ball1.clicked=1
+           }
+            
+        }
+            
+    </script>
+</head>
+
+<body>
+    <div id="code" class="container-fluid">
+        <script src="https://gist-it.appspot.com/github/travism7618/p5js/blob/gh-pages/pong-remix.html?footer=0"></script>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script>
+        $(window).bind("load", function() {
+            $('#code').before($('#defaultCanvas').remove());
+        });
+    </script>
+</body>
+
+
+</html>
