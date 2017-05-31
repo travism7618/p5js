@@ -1,0 +1,256 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <title>p5js Template</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.3/p5.js"></script>
+
+    <script>
+        var notes = []
+        var speed, score, notesHit, ha, c1, c2, c3
+        var gamemode
+
+
+        function setup() {
+            rectMode(CENTER)
+            createCanvas(800, 600);
+            gamemode = 0 //tells if game has started or ended
+            score = 1 //score for hitting notes
+            speed = 0 //speed in which the notes move down 
+            
+            //variables used to change the color of the keys
+            c1 = 0 
+            c2 = 0
+            c3 = 0
+            
+            ha = 0
+            notesHit = 0
+
+            for (var i = 0; i < 90; i++) {
+                notes.push(new note(-1200 - ((i * 400))))
+            }
+
+            for (var i = 0; i < 30; i++) {
+                notes.push(new note(-1200 - ((i * 1200))))
+            }
+
+
+
+
+
+
+        }
+
+        function draw() {
+
+            if (notes.length == 0) {
+                gamemode = 3
+
+            }
+
+            console.log(gamemode)
+            background(0)
+            if (gamemode == 0) {
+                fill(255)
+                textSize(20)
+                textAlign(CENTER)
+                text("Click any key to start!", width / 2, height / 2)
+
+            }
+            if (gamemode == 1) {
+                speed += 0.002
+                    // score
+                fill(255)
+                stroke(0)
+                textSize(20);
+                text("Score: " + score, 40, 30);
+
+
+                // keys
+                stroke(0)
+                fill(255, c1, c1)
+                rect(width / 4, 550, 200, 100)
+                fill(255, 255, c2)
+                rect(width / 2, 550, 200, 100)
+                fill(c3, 167, 237)
+                rect(width / 4 * 3, 550, 200, 100)
+
+                // lane lines
+                stroke(255)
+                line(width / 8, 0, width / 8, height)
+                line(width / 8 * 3, 0, width / 8 * 3, height)
+                line(width / 8 * 5, 0, width / 8 * 5, height)
+                line(width / 8 * 7, 0, width / 8 * 7, height)
+            }
+            // lighting of keys
+            if (keyIsDown(LEFT_ARROW)) {
+                c1 = 75
+            }
+            else {
+                c1 = 1
+            }
+            if (keyIsDown(DOWN_ARROW)) {
+                c2 = 125
+            }
+            else {
+                c2 = 1
+            }
+            if (keyIsDown(RIGHT_ARROW)) {
+                c3 = 75
+            }
+            else {
+                c3 = 1
+            }
+
+
+            for (var i = 0; i < notes.length; i++) {
+                notes[i].show()
+                notes[i].move()
+                if (notes[i].missed()) {
+                    score -= 1
+                    notes.splice(i, 1)
+                }
+
+            }
+            if (gamemode == 3) {
+                ha = (notesHit / 120) * 100 //determines hit acurracy based on notes hit divided by the notes given
+                fill(255)
+                textSize(20)
+                textAlign(CENTER)
+                text("Game Over", width / 2, height / 2)
+                text("Your Score: " + score, width / 2, (height / 2) + 50) //shows final score
+                //changes color of text based on hit acurracy
+                if (ha <= 50) {
+                    fill(255, 0, 0)
+                }
+                else if (ha <= 75 && ha > 50) {
+                    fill(255, 255, 0)
+                }
+                else if (ha >= 85 && ha < 95) {
+                    fill(0, 255, 0)
+                }
+                else {
+                    fill(66, 134, 244)
+                }
+                text("Hit Acurracy: " + ha + "%", width / 2, (height / 2) + 100)
+
+            }
+
+
+
+
+
+
+
+
+        }
+
+        function keyPressed() {
+            score -= 1 //use this as challenge
+            if (gamemode == 0) {
+                speed = 7
+                gamemode = 1
+            }
+
+            if (gamemode == 1) {
+
+                for (var i = 0; i < notes.length; i++) {
+                    if (notes[i].hit()) {
+                        score += 3
+                        notesHit += 1
+                        notes.splice(i, 1)
+                    }
+
+
+                }
+
+
+
+    return false;
+            }
+
+
+
+
+
+
+        }
+
+        function note(y) {
+            this.r = 0
+            this.g = 0
+            this.b = 0
+            this.y = y
+            this.lane = round(random(1, 3))
+            if (this.lane == 1) {
+                this.al = width / 4
+                this.r = 255
+
+            }
+            else if (this.lane == 2) {
+                this.al = width / 2
+                this.g = 255
+                this.r = 255
+            }
+            else {
+                this.al = width / 4 * 3
+                this.g = 167
+                this.b = 237
+            }
+
+            this.show = function() {
+                fill(this.r, this.g, this.b)
+                stroke(0)
+                ellipse(this.al, this.y, 125, 125)
+                // rect(this.al, this.y, 150, 75)
+
+            }
+            this.move = function() {
+                this.y += speed
+
+            }
+            this.missed = function() {
+                if (this.y > 600) {
+                    return true
+                }
+            }
+            this.hit = function() {
+                // left key pressed
+                if (keyCode == LEFT_ARROW && this.al == width / 4 && this.y > 475 && this.y < 600) {
+
+                    return true
+
+
+                }
+
+
+
+                // Down key pressed
+                if (keyCode == DOWN_ARROW && this.al == width / 2 && this.y > 475 && this.y < 600) {
+
+                    return true
+
+
+                }
+
+
+
+                // Right key pressed
+                if (keyCode == RIGHT_ARROW && this.al == width / 4 * 3 && this.y > 450 && this.y < 600) {
+
+                    return true
+
+                }
+
+
+            }
+
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
